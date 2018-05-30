@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习css布局</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+        nav {
+            border: 3px solid #d64078;
+            list-style-type: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        section {
+            border: 3px solid #fdc72f;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .container {
+            border: 3px solid #ffffff;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: -webkit-flex;
+            display: flex;
+        }
+        nav {
+            width: 200px;
+        }
+        .flex-column {
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+<article class="container">
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Taco Menu</li>
+            <li>Draft List</li>
+            <li>Hours</li>
+            <li>Dire</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+
+    <section class="flex-column">
+        <div>Flexbox好容易使用！</div>
+    </section>
+
+    <section>
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</div>
+    </section>
+
+
+</article>
+
+
+
+<!--<footer>-->
+    <!--如果你使用了一个固定定位的页眉或页脚，确保有足够的空间来显示它们！我在 body 上面加了 margin-bottom 。-->
+<!--</footer>-->
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双飞翼布局</title>
+</head>
+
+<style>
+    body {
+        min-width: 600px;
+        margin: 0;
+    }
+
+    h1,
+    p {
+        margin: 0;
+    }
+
+    #header,
+    #footer {
+        line-height: 50px;
+        background-color: #dddddd;
+        text-align: center;
+    }
+
+    #left {
+        background-color: green;
+    }
+
+    #right {
+        background-color: red;
+    }
+
+    #main {
+        background-color: yellowgreen;
+    }
+
+    #main {
+        width: 100%;
+        float: left;
+    }
+
+    #left {
+        width: 250px;
+        float: left;
+        margin-left: -100%;
+        position: relative;
+        left: -250px;
+    }
+
+    #right {
+        width: 200px;
+        float: left;
+        margin-left: -200px;
+        position: relative;
+        right: -200px;
+    }
+
+    #bd {
+        padding: 0 200px 0 250px;
+    }
+
+    #footer {
+        clear: both;
+    }
+
+
+</style>
+
+<body>
+
+<div id="page">
+    <div id="header">
+        header
+    </div>
+
+    <div id="bd">
+        <div id="main-out">
+            <div id="main">
+                <h1>This is the main content.</h1>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet
+                    dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci 规定和人很多人 tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                    dolor in
+                    hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at
+                    vero
+                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+                    dolore te
+                    feugait nulla.</p>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet
+                    dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper
+                    suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
+                    hendrerit in
+                    vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+                    accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                    feugait
+                    nulla.</p>
+            </div>
+        </div>
+        <div id="left"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+            tincidunt
+            ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci 规定和人很多人
+            tation
+            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
+            hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+            eros
+            et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+            nulla.</p>
+        </div>
+        <div id="right"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+            tincidunt
+            ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci 规定和人很多人
+            tation
+            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
+            hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+            eros
+            et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+            nulla.</p>
+        </div>
+    </div>
+
+    <div id="footer">footer</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+.title {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    background-color: #65a4fa;
+    width: 220px;
+    text-align: center;
+    float: left;
+    height: 100%;
+    padding-top: 50px;
+}
+.small-title {
+    font-size: 25px;
+    margin-top: 50px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.desc-title {
+    margin-top: 30px;
+    margin-bottom:0;
+}
+.desc {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+.resume-info {
+    float: left;
+    margin-left: 30px;
+}
+.info {
+    margin-right: 10px;
+}
+.info-detail {
+    margin-right: 40px;
+}
+.resume {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 30px 0 0 0;
+    padding: 0;
+}

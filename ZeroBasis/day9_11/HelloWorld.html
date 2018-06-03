@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        button {
+            cursor: pointer;
+        }
+
+        #first-page {
+            background-image: url("images/Background.png");
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Hello_World {
+            font-size: 62px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        .center-content .summary {
+            width: 70%;
+            margin: 70px auto;
+            font-size: 20px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(255, 255, 255, 0.702);
+        }
+
+        .center-content .account-div {
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #534d48;
+            height: 250px;
+            text-align: center;
+        }
+
+        .Create_Your_Account {
+            font-size: 16px;
+            font-family: "Montserrat";
+            color: rgb(255, 255, 255);
+            text-transform: uppercase;
+            line-height: 1.75;
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .It_is_absolutely_free {
+            font-size: 12px;
+            font-family: "Montserrat";
+            color: rgba(255, 255, 255, 0.302);
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .login-div {
+            margin-top: 40px;
+        }
+
+        #account-input,
+        #password-input {
+            font-size: 14px;
+            font-family: "Montserrat";
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            border: 1px solid #534d48;
+            height: 40px;
+            width: 300px;
+            margin-right: 30px;
+            padding-left: 15px;
+            outline: none;
+        }
+
+        #signup-btn {
+            background-color: #ffffff;
+            border: 0 solid black;
+            height: 40px;
+            width: 80px;
+            outline: none;
+        }
+
+        .landing-page {
+            text-align: center;
+        }
+
+        .landing-page .awesome {
+            font-size: 14px;
+            font-family: "Montserrat";
+            color: rgb(20, 20, 20);
+            text-transform: uppercase;
+            margin-top: 50px;
+        }
+
+        .text-container .ready-made {
+            font-size: 42px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(20, 20, 20);
+            margin: 30px auto;
+            width: 800px;
+        }
+
+        /*MAFC部分*/
+        .MAFC-container {
+            width: 80%;
+            margin: 0 auto 80px auto;
+        }
+
+        .MAFC-div img {
+            float: left;
+        }
+
+        .MAFC-container .MAFC-div {
+            display: inline-block;
+            width: 30%;
+            padding: 30px;
+            text-align: left;
+            vertical-align: top;
+            margin: 0 5%;
+        }
+
+        .MAFC-text {
+            margin-left: 70px;
+        }
+
+        .MAFC-text .title {
+            font-size: 20px;
+            font-family: "Montserrat";
+            color: rgb(20, 20, 20);
+        }
+
+        .MAFC-text .desc {
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(20, 20, 20, 0.702);
+            margin-top: 30px;
+        }
+
+        /* support部分 */
+        .support {
+            height: 900px;
+            width: 100%;
+            background-image: url("images/Background-support.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            position: relative;
+
+        }
+
+        .support .container {
+            width: 60%;
+            height: 425px;
+            position: absolute;
+            top: 50%;
+            margin-top: -212px;
+            margin-left: 25%;
+        }
+
+        .container #smart {
+            font-size: 42px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(255, 255, 255);
+        }
+
+        .container #china {
+            font-size: 18px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(255, 255, 255, 0.702);
+            margin-top: 40px;
+        }
+
+        .container p {
+            width: 400px;
+        }
+
+        .container button {
+            width: 250px;
+            margin-right: 20px;
+            height: 60px;
+            margin-top: 40px;
+        }
+
+        .container button.check {
+            border: 1px solid white;
+            background-color: white;
+        }
+
+        .container button.try {
+            border: 1px solid #656b64;
+            background-color: transparent;
+            color: white;
+        }
+
+        /* products页面 */
+        .products-page #product-title {
+            margin: 60px;
+            font-size: 42px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(20, 20, 20);
+            text-align: center;
+        }
+
+        .products-page .products-div {
+            text-align: center;
+            padding-bottom: 90px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .products-div .product-item {
+            width: 300px;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+            margin: 0 40px;
+        }
+
+        .products-page .product-item p {
+            margin-top: 40px;
+        }
+
+        /* 图片和文字 部分*/
+        .img-text {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .img-text .row {
+            width: 60%;
+            margin: 100px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-text div.right {
+            margin-left: 100px;
+        }
+
+        .img-text div.left {
+            margin-right: 100px;
+        }
+
+        .img-text .desc-div {
+            display: inline-block;
+            width: 300px;
+            text-align: left;
+        }
+
+        .img-text .desc-div p.title {
+            font-size: 20px;
+            font-family: "Montserrat";
+            color: rgb(20, 20, 20);
+        }
+
+        .img-text .desc-div p.desc {
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(20, 20, 20, 0.702);
+            margin-top: 40px;
+        }
+
+        /*Our Crew*/
+        .our-crew {
+            padding: 50px 0;
+            text-align: center;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .our-crew p.title {
+            font-size: 42px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(20, 20, 20);
+        }
+
+        .our-crew p.desc {
+            display: inline-block;
+            font-size: 18px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(20, 20, 20, 0.702);
+            margin-top: 30px;
+            width: 800px;
+        }
+
+        .our-crew .img-div {
+            width: 70%;
+            margin: 50px auto;
+        }
+
+        .our-crew .img-div img {
+            margin: 15px;
+            cursor: pointer;
+        }
+        /* 遮罩层 */
+        .our-crew .cover-div {
+            z-index: -1;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            height: 0;
+            width: 470px;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            -webkit-transition: height 1s;
+            -moz-transition: height 1s;
+            -ms-transition: height 1s;
+            -o-transition: height 1s;
+            transition: height 500ms;
+        }
+        .our-crew img:hover + .cover-div {
+            height: 340px;
+            z-index: 2;
+        }
+        .our-crew .cover-div:hover {
+            height: 340px;
+            z-index: 2;
+        }
+        .our-crew .img {
+            display: inline-block;
+            position: relative;
+        }
+
+
+
+
+
+        .our-crew .cover-div p.people-name {
+            font-size: 20px;
+            font-family: "Montserrat";
+            color: rgb(255, 255, 255);
+        }
+        .our-crew .cover-div p.people-desc {
+            font-size: 12px;
+            font-family: "Montserrat";
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 20px;
+        }
+        .cover-div .link-img {
+            margin-top: 30px;
+        }
+        .cover-div .link-img a {
+            text-decoration: none;
+        }
+
+
+       /*Contact us*/
+        .contact-us {
+            text-align: center;
+            padding: 50px;
+        }
+        .contact-us .write-msg {
+            border: 1px solid #ededed;
+            padding: 30px;
+            display: inline-block;
+        }
+        .contact-us .write-msg p {
+            font-size: 16px;
+            font-family: "Montserrat";
+            color: rgb(20, 20, 20);
+            margin-bottom: 30px;
+        }
+        .contact-us .write-msg input {
+            width: 370px;
+            display: block;
+            margin-bottom: 25px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .contact-us .write-msg .email-subject {
+            height: 45px;
+            outline: none;
+            padding: 15px;
+        }
+        .contact-us .write-msg .message {
+            font-family: "Montserrat";
+            width: 370px;
+            padding: 15px;
+            height: 180px;
+            outline: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .contact-us .write-msg button {
+            display: block;
+            width: 370px;
+            margin-top: 25px;
+            height: 45px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background-color: #131313;
+            border: 1px solid #131313;
+            color: white;
+        }
+
+        .contact-us {
+            border: 1px solid black;
+
+        }
+        .contact-us .contact-div {
+            display: inline-block;
+            margin-left: 100px;
+        }
+        .contact-us .contact-div p.contacts {
+            font-size: 42px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(20, 20, 20);
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        .contact-us .contact-div p.content {
+            width: 280px;
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(20, 20, 20, 0.702);
+            margin: 0 auto 40px auto;
+            text-align: left;
+        }
+        .contact-div .contact-way img {
+            float: left;
+        }
+        .contact-div .contact-way {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .contact-div .contact-way p {
+            font-size: 16px;
+            font-family: "Montserrat";
+            color: rgb(20, 20, 20);
+            margin-left: 15px;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #131313;
+            padding: 60px;
+            text-align: center;
+        }
+        footer span,
+        footer a {
+            display: block;
+        }
+        footer .copyright-div {
+            display: inline-block;
+            margin: 0 80px;
+            text-align: left;
+            vertical-align: top;
+        }
+        footer .copyright-div span {
+            font-size: 14px;
+            font-family: "Montserrat";
+            color: rgb(255, 255, 255);
+        }
+        footer .copyright-div a.link-text,
+        footer .copyright-div p {
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgba(255, 255, 255, 0.302);
+            margin-top: 30px;
+            text-decoration: none;
+        }
+        footer .copyright-div a.link-text:hover {
+            color: #c40000;
+        }
+        footer .copyright-div p {
+            margin: 30px 0;
+            width: 250px;
+        }
+        footer .copyright-div a.img-link {
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+<!--第一屏-->
+<div id="first-page">
+    <div class="center-content">
+        <h1 class="Hello_World">Hello World</h1>
+        <p class="summary">China is speeding up strategic plan , standards , traffic rules , laws and regulations on
+            accident-incurred liabilities for its smart car industry , Economic Information Daily reported Thursday
+            .</p>
+
+        <div class="account-div">
+            <p class="Create_Your_Account">CREATE YOUR ACCOUNT</p>
+            <P class="It_is_absolutely_free">IT IS ABSOLUTELY FREE</P>
+            <div class="login-div">
+                <input type="email" placeholder="denis@qq.com" id="account-input">
+                <input type="password" placeholder="Create your password" id="password-input">
+                <button id="signup-btn">SIGN UP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--landing-page页面部分-->
+<div class="landing-page">
+    <div class="text-container">
+        <p class="awesome">BOATLOADS OF AWESOME</p>
+        <p class="ready-made">Ready-made, customizable, HTML landing page sections</p>
+    </div>
+    <div class="MAFC-container">
+        <div class="MAFC-row">
+            <div class="MAFC-div">
+                <img src="images/Iphone Icon.png" height="49" width="30"/>
+                <div class="MAFC-text">
+                    <p class="title">Mobile First</p>
+                    <p class="desc">All modulz are built mobile-first for maximum device compatibility</p>
+                </div>
+            </div>
+
+            <div class="MAFC-div">
+                <img src="images/Check Icon.png" height="37" width="40"/>
+                <div class="MAFC-text">
+                    <p class="title">Accessibility</p>
+                    <p class="desc">Support for IE8, mobile and tablet devices, screenreaders and color blind.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="MAFC-row">
+            <div class="MAFC-div">
+                <img src="images/Pencil Icon.png" height="48" width="49"/>
+                <div class="MAFC-text">
+                    <p class="title">Fluid Typography</p>
+                    <p class="desc">On different screen sizes, fonts automagically scale with the viewport</p>
+                </div>
+            </div>
+
+            <div class="MAFC-div">
+                <img src="images/Settings Icon.png" height="42" width="50"/>
+                <div class="MAFC-text">
+                    <p class="title">Customization</p>
+                    <p class="desc">Make any design your own using the Style Editor. Personalize fonts, colors, and
+                        layouts to create the custom look you want.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--support部分-->
+<div class="support">
+    <div class="container">
+        <p id="smart">Supportive policies for China's smart car</p>
+        <p id="china">China will come up with its own smart car standards, traffic rules, laws and regulations relating
+            to safety, according to the China Industry Innovation Alliance for the Intelligent and Connected
+            Vehicles.</p>
+        <div class="button-div">
+            <button class="check">CHECK OUT FEATURES</button>
+            <button class="try">TRY PRODUCT FOR FREE</button>
+        </div>
+    </div>
+</div>
+
+
+<!--products页面-->
+<div class="products-page">
+    <p id="product-title">Try Our Awesome Products</p>
+    <div class="products-div">
+
+        <div class="product-item">
+            <img src="images/Singleton.png" height="35" width="120"/>
+            <p>Li Jun, a China Academy of Engineering academician and also director of the alliance's experts'
+                committee, said that China will also launch design guidance for smart cars, smart map architecture and
+                standards for test grounds.</p>
+        </div>
+
+        <div class="product-item">
+            <img src="images/Hero.png" height="34" width="75"/>
+            <p>Li said the smart car industry is able to enlarge the current car industry by 1 trillion yuan ($158.15
+                billion) and also able to boost fast development in 5G, internet of cars, big data, artificial
+                intelligence and new-energy vehicles.</p>
+        </div>
+
+        <div class="product-item">
+            <img src="images/Portland.png" height="31" width="117"/>
+            <p>Zhang Junyi, a partner with NIO Capital, said that the smart car is the trend for the car industry and
+                China's auto sector will usher in a new key development stage with the improvement of infrastructure,
+                technology, policies and laws.</p>
+        </div>
+    </div>
+</div>
+
+<!--图文div-->
+<div class="img-text">
+
+    <div class="row">
+        <img src="images/leaves.png" height="350" width="570"/>
+        <div class="desc-div right">
+            <p class="title">Learn How to Improve Your Personal Business</p>
+            <p class="desc">Li Jun, a China Academy of Engineering academician and also director of the alliance's
+                experts' committee, said that China will also launch design guidance for smart cars, smart map
+                architecture and standards for test grounds.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="desc-div left">
+            <p class="title">Choose Between Two Beautifully Designed Color Schemes.</p>
+            <p class="desc">China will come up with its own smart car standards, traffic rules, laws and regulations
+                relating to safety, according to the China Industry Innovation Alliance for the Intelligent and
+                Connected Vehicles.</p>
+        </div>
+        <img src="images/brid.png" height="350" width="570"/></div>
+</div>
+
+<!--Our Crew-->
+<div class="our-crew">
+    <p class="title">Our Awesome Crew</p>
+    <p class="desc">Our unique online teaching style makes learning easy for everyone. Whether you are trying to land a
+        new job, brush up on your skills.</p>
+
+    <div class="img-div">
+
+        <div class="img">
+            <img class="people-img" src="images/Userpic 1.png" height="340" width="470"/>
+            <div class="cover-div">
+                <p class="people-name">Ethan Dutton</p>
+                <p class="people-desc">SENIOR VISUAL DESIGNER</p>
+                <div class="link-img">
+                    <a href="#">
+                        <img src="images/Facebook.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Twitter.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Instagram.png" height="54" width="51"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="img">
+            <img class="people-img" src="images/Userpic 2.png" height="340" width="470"/>
+            <div class="cover-div">
+                <p class="people-name">Gustavo</p>
+                <p class="people-desc">SENIOR VISUAL DESIGNER</p>
+                <div class="link-img">
+                    <a href="#">
+                        <img src="images/Facebook.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Twitter.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Instagram.png" height="54" width="51"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="img">
+            <img class="people-img" src="images/Userpic 3.png" height="340" width="470"/>
+            <div class="cover-div">
+                <p class="people-name">August</p>
+                <p class="people-desc">SENIOR VISUAL DESIGNER</p>
+                <div class="link-img">
+                    <a href="#">
+                        <img src="images/Facebook.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Twitter.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Instagram.png" height="54" width="51"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="img">
+            <img class="people-img" src="images/Userpic 4.png" height="340" width="470"/>
+            <div class="cover-div">
+                <p class="people-name">Alberto</p>
+                <p class="people-desc">SENIOR VISUAL DESIGNER</p>
+                <div class="link-img">
+                    <a href="#">
+                        <img src="images/Facebook.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Twitter.png" height="54" width="51"/>
+                    </a>
+                    <a href="#">
+                        <img src="images/Instagram.png" height="54" width="51"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact us -->
+<div class="contact-us">
+
+    <div class="write-msg">
+        <p>Fell free to Write Us</p>
+        <input class="email-subject" type="email" placeholder="E-mail">
+        <input class="email-subject" type="text" placeholder="Subject">
+        <textarea class="message"  placeholder="Message"></textarea>
+        <button type="submit">SEND</button>
+    </div>
+
+    <div class="contact-div">
+        <p class="contacts">Contacts</p>
+        <p class="content">Make any design your own using the Style Editor. Personalize fonts, colors, and layouts to create the custom look you want.</p>
+
+        <div class="contact-way">
+            <img src="images/Map Icon.png" height="25" width="19"/>
+            <p>360 King Street <br>
+                Feastrvale Trevose, PA 19057  </p>
+        </div>
+
+        <div class="contact-way">
+            <img src="images/Phone Icon.png" height="24" width="24"/>
+            <p>(755) 564-84-12</p>
+        </div>
+
+        <div class="contact-way">
+            <img src="images/Mail Icon.png" height="19" width="24"/>
+            <p>youname@mail.com</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!--footer部分-->
+<footer>
+
+    <div class="copyright-div" >
+        <span class="title">LEARN MORE</span>
+        <a class="link-text" href="#">How it works?</a>
+        <a class="link-text" href="#">Meeting tools</a>
+        <a class="link-text" href="#">Live Streaming</a>
+        <a class="link-text" href="#">Contact method</a>
+    </div>
+
+    <div class="copyright-div">
+        <span class="title">ABOUT US</span>
+        <a class="link-text" href="#">About us</a>
+        <a class="link-text" href="#">Features</a>
+        <a class="link-text" href="#">Privacy police</a>
+        <a class="link-text" href="#">Terms & Conditions</a>
+    </div>
+
+    <div class="copyright-div">
+        <span class="title">SUPPORT</span>
+        <a class="link-text" href="#">F.A.Q</a>
+        <a class="link-text" href="#">Contact us</a>
+        <a class="link-text" href="#">Live chart</a>
+        <a class="link-text" href="#">Phone call</a>
+    </div>
+
+    <div class="copyright-div">
+        <span class="title">ENJOY YOUR LIFE</span>
+        <p>Great web UI kit for designers, freelancers or business.</p>
+        <div class="icon-div">
+            <a class="img-link" href="#"><img src="images/Twitter Icon.png" height="14" width="17"/></a>
+            <a class="img-link" href="#"><img src="images/Facebook Icon.png" height="18" width="9"/></a>
+            <a href="#" class="img-link"><img src="images/Google Icon.png" height="15" width="24"/></a>
+            <a href="#" class="img-link"><img src="images/Tumbler Icon.png" height="16" width="10"/></a>
+            <a href="#" class="img-link"> <img src="images/Pinterest Icon.png" height="17" width="14"/></a>
+            <a href="#" class="img-link"> <img src="images/LinkedIn Icon.png" height="15" width="16"/></a>
+        </div>
+    </div>
+
+
+</footer>
+
+
+
+
+<script>
+
+    let firstPage = document.getElementById('first-page');
+    //let height = document.documentElement.clientHeight;
+    let height = window.innerHeight;
+    firstPage.style.height = height + 'px';
+
+    //登录判断
+    let oSignInBtn = document.getElementById('signup-btn');
+    let oAccount = document.getElementById('account-input');
+    let oPassowrd = document.getElementById('password-input');
+    oSignInBtn.onclick = function () {
+        if (oAccount.value === 'user' && oPassowrd.value === '123') {
+            alert('登录成功');
+        }else if (oAccount.value === '' && oPassowrd.value === '') {
+            alert('请输入用户名和密码')
+        }else if (oAccount.value != 'user' && oPassowrd.value != '123'){
+            alert('用户名或密码错误')
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

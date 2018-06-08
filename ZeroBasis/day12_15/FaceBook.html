@@ -2,9 +2,851 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>FaceBook</title>
+
+    <style>
+        /* reset */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 第一栏App部分 */
+        .app-div {
+            background-color: #1c2430;
+            padding: 15px;
+            display: inline-block;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            position: fixed;
+        }
+
+        .app-div .apps a {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .app-div .BottomActions {
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .app-div .BottomActions a#setting {
+            margin-left: 20px;
+        }
+
+        /* 选中的app */
+        .app-div .apps a.active:before {
+            content: '.';
+            font-size: 0;
+            border: 2px solid #2699ef;
+            border-radius: 50%;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+        }
+
+        .apps .position-div {
+            position: relative;
+        }
+
+        /* menu部分 */
+        .menu-div {
+            margin-left: 90px;
+            background-color: #212b3b;
+            width: 250px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 15px;
+            position: fixed;
+        }
+
+        /* 设置字体 */
+        .menu-div .menuItems a.menu-title {
+            font-size: 12px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(91, 103, 121);
+            text-transform: uppercase;
+        }
+
+        .menu-div .menuItems a.menu-item {
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(183, 192, 205);
+        }
+
+        .menu-div .menuItems a {
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 150px;
+        }
+
+        .menu-div .menuItems {
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .menu-div .menuItems a.settings {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            width: 35px;
+        }
+
+        .menu-div .menuItems:nth-of-type(2) {
+            padding-top: 10px;
+            border-top: 1px solid #263142;
+        }
+
+        .menu-div .menuItems:nth-of-type(3) {
+            border-top: 1px solid #263142;
+            padding-top: 10px;
+        }
+
+        /* 底部 ServerCapacity-div*/
+        .ServerCapacity-div {
+            position: fixed;
+            bottom: 0;
+            margin-bottom: 15px;
+
+        }
+
+        .ServerCapacity-div span {
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: white;
+            display: inline-block;
+            position: relative;
+            bottom: 20px;
+        }
+
+        .ServerCapacity-div span#total-capacity {
+            font-size: 12px;
+        }
+
+        .ServerCapacity-div p#now-progress {
+            width: 25%;
+            position: relative;
+            border: 2px solid #9684e1;
+            top: -10px;
+            border-radius: 15px;
+        }
+
+        .ServerCapacity-div p#total-progress {
+            width: 100%;
+            border: 2px solid #2c3747;
+            position: relative;
+            top: -6px;
+            border-radius: 15px;
+        }
+
+        /* 选中的item */
+        .menuItems a.active {
+            color: white !important;
+        }
+
+        .menuItems a.active:before {
+            content: '•';
+            position: absolute;
+            left: -15px;
+            color: #2699ef;
+        }
+
+        /*消息数量*/
+        .menu-div .menuItems .msgNum:after {
+            content: '15';
+            position: absolute;
+            right: 12px;
+            background-color: #2c9ef3;
+            border-left: 7px solid #2c9ef3;
+            border-right: 7px solid #2c9ef3;
+            border-top: 2px solid #2c9ef3;
+            border-bottom: 2px solid #2c9ef3;
+            border-radius: 25px;
+        }
+
+        /* 顶部状态栏 */
+        .topState-div {
+            position: fixed;
+            top: 0;
+            left: 340px;
+            width: 100%;
+            height: 80px;
+            line-height: 80px;
+            border-bottom: 1px solid #f0f2f3;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .topState-div .message {
+            margin-left: 30px;
+        }
+
+        .topState-div .user-div {
+            position: fixed;
+            top: 15px;
+            right: 40px;
+            display: inline-block;
+            width: 180px;
+            height: 65px;
+        }
+
+        .user-div span.userName {
+            position: relative;
+            top: -30px;
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(35, 153, 241);
+        }
+
+        .user-div span.userType {
+            position: relative;
+            top: -85px;
+            left: 55px;
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(181, 181, 181);
+        }
+
+        .topState-div img.dropDown {
+            position: fixed;
+            right: 20px;
+            top: 37px;
+        }
+
+        /* 消息列表 */
+        .msgList-div {
+            margin-left: 340px;
+            padding-top: 80px;
+        }
+
+        /*搜索框*/
+        .msgList-div .search-div {
+            padding: 15px;
+            width: 400px;
+            position: fixed;
+            background-color: white;
+            z-index: 1;
+            border: 1px solid #e5e8eb;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+        }
+
+        .search-div {
+            position: relative;
+        }
+
+        .search-div input {
+            width: 100%;
+            padding: 10px 30px 10px 10px;
+            border: 1px solid #e5e8eb;
+            border-radius: 5px;
+            outline: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .msgList-div .search-div img {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+
+        /*消息列表*/
+        .msgList-div {
+            width: 400px;
+            float: left;
+            position: fixed;
+        }
+
+        .msgList-div .msgList {
+            width: 400px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-right: 1px solid #e5e8eb;
+            margin-top: 69px;
+        }
+
+        .msgList .perPeopleMsg {
+            padding: 20px;
+            border-bottom: 1px solid #e5e8eb;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .msgList .perPeopleMsg img {
+            float: left;
+        }
+
+        .msgList .perPeopleMsg .peopleInfo span {
+            display: block;
+            margin-left: 66px;
+        }
+
+        .msgList .perPeopleMsg p {
+            clear: both;
+            font-size: 14px;
+            font-family: "Myriad Pro";
+            color: rgb(88, 93, 104);
+            margin-top: 15px;
+            height: 39px;
+            overflow: hidden;
+            padding-right: 20px;
+        }
+
+        /* 设置字体 */
+        .perPeopleMsg .peopleInfo span.name {
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: #575c67;
+        }
+
+        .perPeopleMsg .peopleInfo span.msgOrigin {
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(181, 181, 181);
+        }
+
+        .perPeopleMsg .msgTime {
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(127, 143, 164);
+        }
+
+        .msgList .activeContact {
+            border-left: 3px solid #2699ef;
+        }
+
+        .msgList .perPeopleMsg .peopleInfo .activeName {
+            font-size: 16px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(35, 153, 241);
+            padding-left: 13px;
+        }
+
+        .peopleInfo .activeName:before {
+            content: '•';
+            font-size: 30px;
+            color: #0caafd;
+            position: absolute;
+            top: 10px;
+            left: 84px;
+        }
+
+        .perPeopleMsg .msgTime {
+            position: absolute;
+            top: 23px;
+            right: 20px;
+        }
+
+        .perPeopleMsg .msgNum {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            background-color: #2598ee;
+            color: white;
+            border-radius: 50%;
+            padding: 1px 7px 1px 7px;
+        }
+
+        /*rightTools*/
+        .right-div {
+            margin-left: 740px;
+            padding-top: 80px;
+        }
+
+        .rightTools-div {
+            position: fixed;
+            height: 68px;
+            border-bottom: 1px solid #e5e8eb;
+            background-color: white;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .rightTools-div .nowName {
+            position: relative;
+            top: 23px;
+            left: 20px;
+            font-size: 18px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(88, 93, 104);
+        }
+
+        .rightTools-div .nowName:after {
+            content: ';';
+            border: 3px solid #15b838;
+            border-radius: 50%;
+            font-size: 0;
+            position: relative;
+            left: 10px;
+            bottom: 5px;
+        }
+
+        .rightTools-div .rightButton-div div {
+            display: inline-block;
+        }
+
+        .rightTools-div .rightButton-div {
+            position: fixed;
+            right: 20px;
+        }
+
+        .rightTools-div .rightButton-div button {
+            height: 35px;
+            width: 35px;
+            vertical-align: top;
+        }
+
+        .rightTools-div .rightButton-div .pagesNum {
+            position: relative;
+            top: 7px;
+            padding: 0 20px;
+            border-left: 1px solid #eff0f3;
+            margin-left: 20px;
+            font-size: 14px;
+            font-family: "Adobe Heiti Std";
+            color: rgb(86, 104, 138);
+        }
+
+
+        /*消息详情div*/
+        .dialogue-div {
+            margin-top: 70px;
+            z-index: 0;
+            position: fixed;
+        }
+        .dialogue-div .perDialogue-div {
+            padding: 30px 30px 40px 30px;
+            border-bottom: 1px solid #e5e8eb;
+            position: relative;
+        }
+        .perDialogue-div .otherMsgInfo,
+        .perDialogue-div .myMsgInfo {
+            margin-top: 20px;
+        }
+        .perDialogue-div .otherMsgInfo .otherMsg,
+        .perDialogue-div .myMsgInfo .myMsg {
+            padding-top: 10px;
+        }
+
+        .perDialogue-div .otherMsgInfo .otherIcon,
+        .perDialogue-div .myMsgInfo .myIcon {
+            float: left;
+        }
+        .otherInfo,
+        .otherMsg,
+        .otherImg,
+        .myInfo,
+        .myMsg,
+        .myImg {
+            margin-left: 70px;
+        }
+        .reply-div {
+            margin-top: 20px;
+        }
+        .reply-div button.plus {
+            height: 55px;
+            width: 55px;
+            background-image: url("images/AddBase.png");
+            background-size: 100% 100%;
+            border-width: 0;
+            float: left;
+        }
+        .reply-div input.writeMsg {
+            height: 55px;
+            width: calc(100% - 70px);
+
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .dialogue-div .timeLine {
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            background-color: white;
+            padding: 0 20px;
+            z-index: 1;
+            color: #7e8ea3;
+        }
+        .dialogue-div .newMessage {
+            color: #2699ef;
+        }
+        .dialogue-div #newMessageDiv {
+            border-top: 1px solid #2699ef;
+        }
+
+
+    </style>
+
+
 </head>
 <body>
-$END$
+<!--左侧apps部分-->
+<div class="app-div" id="app-div">
+
+    <div class="apps">
+        <div class="position-div">
+            <a class="app" href="#">
+                <img src="images/Item 1.png" height="60" width="60"/>
+            </a>
+        </div>
+        <div class="position-div">
+            <a class="active app" href="#">
+                <img src="images/Item 2.png" height="60" width="60"/>
+            </a>
+        </div>
+        <div class="position-div">
+            <a class="app" href="#">
+                <img src="images/Item 3.png" height="60" width="60"/>
+            </a>
+        </div>
+        <a href="#">
+            <img src="images/Add App.png" height="60" width="60"/>
+        </a>
+    </div>
+
+    <div class="BottomActions">
+        <a href="#">
+            <img src="images/Grid.png" height="16" width="16"/>
+        </a>
+        <a id="setting" href="#">
+            <img src="images/Settings.png" height="16" width="16"/>
+        </a>
+    </div>
+
+</div>
+
+<!--menu部分-->
+<div class="menu-div">
+
+    <div class="menuItems">
+        <a href="#" class="menu-title">MENU</a>
+        <a href="#" class="menu-item">Overview</a>
+        <a href="#" class="menu-item">Sales</a>
+        <a href="#" class="menu-item">Your Staff</a>
+        <a href="#" class="menu-item">Analytics & Targeting</a>
+        <a href="#" class="menu-item">What’s New</a>
+
+        <a href="#" class="settings">
+            <img src="images/Settings.png" height="16" width="16"/>
+        </a>
+    </div>
+
+    <div class="menuItems">
+        <a href="#" class="menu-title">YOUR PRODUCTS</a>
+        <div>
+            <img src="images/Books.png" height="16" width="14"/>
+            <a href="#" class="menu-item">Books</a>
+        </div>
+        <div>
+            <img src="images/Video.png" height="12" width="18"/>
+            <a href="#" class="menu-item">Tutorials</a>
+        </div>
+        <div>
+            <img src="images/Painting.png" height="16" width="18"/>
+            <a href="#" class="menu-item">Stocks</a>
+        </div>
+        <div>
+            <img src="images/Chart.png" height="16" width="16"/>
+            <a href="#" class="menu-item">Infographics</a>
+        </div>
+
+        <a href="#" class="settings">
+            <img src="images/Settings.png" height="16" width="16"/>
+        </a>
+    </div>
+
+    <div class="menuItems">
+        <a href="#" class="menu-title">DASHBOARD</a>
+        <a href="#" class="active menu-item msgNum">Messages</a>
+        <a href="#" class="menu-item">Connections</a>
+        <a href="#" class="menu-item">Integrations</a>
+        <a href="#" class="menu-item">Account Settings</a>
+        <a href="#" class="menu-item">App Settings</a>
+
+        <a href="#" class="settings">
+            <img src="images/Settings.png" height="16" width="16"/>
+        </a>
+    </div>
+
+
+    <div class="ServerCapacity-div">
+        <span>Monthly Goals</span>
+        <span>$580</span>
+        <span id="total-capacity">/$3200</span>
+        <p id="total-progress"></p>
+        <p id="now-progress"></p>
+    </div>
+
+</div>
+
+<!--顶部状态栏-->
+<div class="topState-div">
+    <span class="message">Messages</span>
+    <div class="user-div">
+        <img class="userImg" src="images/userImg.png" height="50" width="50"/>
+        <span class="userName">JordanJ.</span>
+        <span class="userType">Administrator</span>
+    </div>
+    <img class="dropDown" src="images/dropdown.png" height="7" width="11"/>
+</div>
+
+<!--消息列表-->
+<div class="msgList-div">
+
+    <div class="search-div">
+        <input type="text" class="search" placeholder="Search">
+        <img src="images/Search icon.png" alt="">
+    </div>
+
+    <div class="msgList">
+
+        <div class="activeContact perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarBessie.png" alt="">
+            <div class="peopleInfo">
+                <span class="name activeName">Bessie Berry</span>
+                <span class="msgOrigin">Twitter</span>
+            </div>
+            <p class="msgText">I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively
+                quick, and stable...</p>
+            <span class="msgTime">3m</span>
+            <span class="msgNum">4</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarVictor.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Victor Weber</span>
+                <span class="msgOrigin">Adobe</span>
+            </div>
+            <p class="msgText">I shared this on my fb wall a few months back, and I thought I'd share it here again
+                because it's such a great...</p>
+            <span class="msgTime">8m</span>
+            <span class="msgNum">6</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarDustin.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Dustin Benson</span>
+                <span class="msgOrigin">Facebook</span>
+            </div>
+            <p class="msgText">If there is anyone who needs an invitation please add yourself in the comments of this
+                post!</p>
+            <span class="msgTime">Yesterday</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarJack.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Jack Mason</span>
+                <span class="msgOrigin">Yahoo</span>
+            </div>
+            <p class="msgText">BruteDC is a peer-to-peer movie+tv series sharing and downloading platform which works on
+                intranet inside...</p>
+            <span class="msgTime">Yesterday</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarStephen.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Stephen Shelton</span>
+                <span class="msgOrigin">Snapchat</span>
+            </div>
+            <p class="msgText">Yes, p2p traffic is often filtered (QoSed). Although i do use BT on O2 wires, and in good
+                days dl speed...</p>
+            <span class="msgTime">13 Jun</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarSally.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Sally Willis</span>
+                <span class="msgOrigin">Twitter</span>
+            </div>
+            <p class="msgText">Yes, it's O2: 'internet extreme', which is no longer offered.</p>
+            <span class="msgTime">12 Jun</span>
+        </div>
+
+        <div class="perPeopleMsg">
+            <img class="peopleImg" src="images/AvatarRobert.png" alt="">
+            <div class="peopleInfo">
+                <span class="name">Robert Patton</span>
+                <span class="msgOrigin">A Team</span>
+            </div>
+            <p class="msgText">I change my service from this 4Mb plan to their much cheaper 8Mb plan, my speed will
+                dramatically decrease.</p>
+            <span class="msgTime">9 Jun</span>
+        </div>
+
+    </div>
+
+</div>
+
+<!--右侧栏-->
+<div class="right-div">
+    <div class="rightTools-div">
+        <span class="nowName">Bessie Berry</span>
+        <div class="rightButton-div">
+
+            <div class="functionBtn">
+                <button><img src="images/AddUser icon.png" height="16" width="16"/></button
+                ><button><img src="images/Upload icon.png" height="15" width="16"/></button
+                ><button><img src="images/Trash icon.png" height="16" width="16"/></button>
+                <span class="pagesNum">1 of 28</span>
+            </div>
+
+            <div class="pageTurnBtn">
+                <button><img src="images/Arrow left.png" height="10" width="6"/></button
+                ><button><img src="images/Arrow right.png" height="10" width="6"/></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="dialogue-div">
+
+        <div class="perDialogue-div">
+            <div class="otherMsgInfo">
+                <img src="images/AvatarBessie.png" alt="" class="otherIcon">
+                <div class="otherInfo">
+                    <span class="otherName">Bessie Berry</span>
+                    <span class="msgTime">8:31 AM</span>
+                </div>
+                <p class="otherMsg">Hi guys Ive got the O2 package and have really slow internet. A speed check online said i can get 3mbps but it seems more like 0.5 these days, just freezing and taking ages to open pages and open audio files for example. I have decided to switch to the UPC package which offers 10mbps but do you think i will get it?</p>
+                <div class="otherImg"></div>
+            </div>
+            <div class="myMsgInfo">
+                <img src="images/AvatarJack.png" alt="" class="myIcon">
+                <div class="myInfo">
+                    <span class="myName">Jordan Jackson</span>
+                    <span class="myTime">8:31 AM</span>
+                </div>
+                <p class="myMsg">I have internet for 9 month and nevere could benefit from the full capacity of 5Mbit/s as it is filtered by O2 when it detect traffic on public p2p sharing in my situation all my internet speed slows to 512Kbit/s. I never had 400KB/s on when downloading from p2p public servers like torrent emule etc. I downoad with 500KB/s from private trakers instead. So conlcusion O2 block trafic on p2p connections. I have made hundreds of test in Italy and Sweden and Romania with the same file to doanload with the same setting and same antivirus and just needed to open ports in firewall and forward same ports and the speed was at full capacity in 1 minute. here in 9 month never had this luck.</p>
+                <div class="myImg"></div>
+            </div>
+            <div class="timeLine">Tuesday</div>
+        </div>
+
+        <div class="perDialogue-div">
+            <div class="otherMsgInfo">
+                <img src="images/AvatarBessie.png" alt="" class="otherIcon">
+                <div class="otherInfo">
+                    <span class="otherName">Bessie Berry</span>
+                    <span class="msgTime">8:31 AM</span>
+                </div>
+                <p class="otherMsg">Funny comparison. so would the proper antivirus not slow down the internet as much or do you mean a freebie doenst protect the computer from viruses?</p>
+                <div class="otherImg"></div>
+            </div>
+            <div class="myMsgInfo">
+                <img src="images/AvatarJack.png" alt="" class="myIcon">
+                <div class="myInfo">
+                    <span class="myName">Jordan Jackson</span>
+                    <span class="myTime">8:31 AM</span>
+                </div>
+                <p class="myMsg">I pay for the 4Mb/sec down, 512 Kb/sec up service from O2, and haven't had any problems. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. I max out at about 3 Mb/sec down, and 350 Kb/sec up. Probably because of a noisy telephone line, not because I'm being throttled. When my uploads go over 25 KB/sec (note, bytes, not bits), my download speed suffers. This is expected, as downloads require upload bandwidth as well. </p>
+                <div class="otherImg" style="padding-top: 20px;">
+                    <img src="images/otherImg1.png" alt="">
+                    <img src="images/otherImg2.png" alt="">
+                </div>
+            </div>
+            <div class="timeLine newMessage">New Messages</div>
+        </div>
+
+        <div class="perDialogue-div" id="newMessageDiv">
+            <div class="otherMsgInfo">
+                <img src="images/AvatarBessie.png" alt="" class="otherIcon">
+                <div class="otherInfo">
+                    <span class="otherName">Bessie Berry</span>
+                    <span class="msgTime">8:31 AM</span>
+                </div>
+                <p class="otherMsg">Funny comparison. so would the proper antivirus not slow down the internet as much or do you mean a freebie doenst protect the computer from viruses?</p>
+                <div class="otherImg"></div>
+            </div>
+            <div class="reply-div">
+                <button class="plus"><img src="images/Add icon.png" alt=""></button
+                ><input type="text" class="writeMsg">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    (function () {
+        let browserH = document.documentElement.clientHeight;
+        let oAppsDiv = document.getElementById('app-div');
+        let oMenuDiv = document.querySelector('.menu-div');
+        oAppsDiv.style.height = browserH + 'px';
+        oMenuDiv.style.height = browserH + 'px';
+
+        //app点击切换选中状态
+        let oItemApp = document.querySelectorAll('.apps a.app')
+        for (let i = 0; i < oItemApp.length; i++) {
+            oItemApp[i].onclick = function () {
+                for (let j = 0; j < oItemApp.length; j++) {
+                    oItemApp[j].classList.remove('active')
+                }
+                this.classList.add('active')
+            }
+        }
+
+        //menu item点击切换选中状态
+        let aMenuItem = document.querySelectorAll('.menu-item');
+        for (let j = 0; j < aMenuItem.length; j++) {
+            aMenuItem[j].onclick = function () {
+                for (let h = 0; h < aMenuItem.length; h++) {
+                    aMenuItem[h].classList.remove('active')
+                }
+                this.classList.add('active')
+            }
+        }
+
+        //消息列表滑动事件
+        let oMsg = document.querySelector('.msgList-div');
+        let oDialogue = document.querySelector('.dialogue-div');
+
+        oMsg.onmouseenter = function () {
+            this.style.position = 'static'
+        };
+        oMsg.onmouseleave = function(){
+            this.style.position = 'fixed'
+        };
+        oDialogue.onmouseenter = function () {
+            this.style.position = 'static'
+        };
+        oDialogue.onmouseleave = function(){
+            this.style.position = 'fixed'
+        };
+        function f() {
+            this.style.position = 'fixed'
+        }
+
+
+       })()
+
+
+</script>
+
 </body>
 </html>

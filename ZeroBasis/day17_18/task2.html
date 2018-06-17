@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IFE ECMAScript</title>
+</head>
+<body>
+<input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+<input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+<button id="trans-btn">转化为二进制</button>
+<p id="result">运算结果</p>
+<script>
+
+    var oInputNumber = document.querySelector('#dec-number');
+    var oBinBit = document.querySelector('#bin-bit');
+    var oBtn = document.querySelector('#trans-btn');
+    var oresult = document.querySelector('#result');
+    var aten = [];
+
+    function dec2bin(decNumber) {
+        // 在这里实现你的转化方法，注意需要判断输入必须为一个非负整数
+        var binBit = parseInt(oBinBit.value);
+        var shang = decNumber;
+        var yushu = 0;
+        while (shang > 0){
+            yushu = shang%2;
+            shang = Math.floor(shang/2);
+            aten.unshift(yushu)
+        }
+        var len = aten.length;
+        if (len < binBit) {
+            for(let k = 0; k < binBit - len; k++) {
+                aten.unshift(0);
+            }
+        }else {
+            console.log('error:binbit长度太小')
+        }
+    }
+
+    oBtn.onclick = function () {
+        var tenNum = parseInt(oInputNumber.value);
+        if (tenNum > 0){
+            dec2bin(tenNum);
+        }
+        oresult.innerHTML = aten.toString().replace(/,/g,'');
+        aten = [];
+    }
+
+
+
+
+</script>
+</body>
+</html>

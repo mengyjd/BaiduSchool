@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="style_1.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="style_2.css">-->
+    <link id="style" rel="stylesheet" type="text/css" href="style_3.css">
+    <script src="jquery.min.js"></script>
+
+
+
+</head>
+
+<body >
+<button id="sty1">sty1</button>
+<button id="sty2">sty2</button>
+<button id="sty3">sty3</button>
+<div class="resume">
+    <div class="title">简历</div>
+
+    <div class="resume-info">
+    <p class="small-title">基本信息</p>
+    <p class="desc">
+        <strong class="info">姓名</strong><span  class="info-detail">梦萦几度</span>
+        <strong  class="info">性别</strong><span class="info-detail">男</span>
+        <strong class="info">应聘职位</strong><span class="info-detail">web前端工程师</span>
+    </p>
+
+    <p class="small-title">联系方式</p>
+    <p class="desc">
+            <strong class="info">手机</strong><span class="info-detail">12456789</span>
+        <strong class="info">Email</strong><span class="info-detail">17856689@qq.com</span>
+        <strong class="info">个人主页</strong><a class="info-detail" href="https://github.com/">github</a>
+    </p>
+
+    <p class="small-title">能力描述</p>
+        <div class="descDiv">
+    <p class="desc-title">技术能力</p>
+    <span class="desc-span width90" id="first-span ">熟练掌握html，css，javascript</span>
+    <p class="desc-title">综合能力</p>
+    <span class="desc-span width90 ">良好的沟通，主动积极，努力勤奋</span>
+        </div>
+
+    <p class="small-title">教育经历</p>
+        <div class="descDiv">
+    <p class="desc-title">本科</p>
+    <span class="desc-span width90">百度前端技术小薇学院</span>
+    <p class="desc-title">研究生</p>
+    <span class="desc-span  width85">百度前端技术大斌学院</span>
+        </div>
+
+    <p class="small-title">项目经历</p>
+    <p class="desc-title">小镀小杜</p>
+    <span class="desc-span width85">作为前端工程师参与了abc组件的开发</span>
+    <p class="desc-title">SAN DOC</p>
+    <span class="desc-span  width85">作为文档工程师参与了SAN DOC编写</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#sty1").click(function () {
+            $("link#style").attr("href","style_1.css");
+        });
+        $("#sty2").click(function () {
+            $("link#style").attr("href","style_2.css");
+        });
+        $("#sty3").click(function () {
+            $("link#style").attr("href","style_3.css");
+        });
+
+        var time = new Date().getHours();
+        if (time < 10 && time > 6){
+            alert('早上好');
+        } else if (time <15 && time > 12) {
+            alert('中午好');
+        }else if(time <23 && time > 19) {
+            alert('晚上好');
+        }
+    })
+</script>
+
+
+</body>
+</html>

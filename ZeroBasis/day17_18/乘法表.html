@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+    <style>
+        table tr td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<table cellspacing="0" cellpadding="10px"></table>
+
+<script>
+    var table = document.querySelector('table');
+    multiply();
+    
+    function multiply() {
+        for(var m = 1; m <= 9; m++) {
+            var tr = document.createElement('tr');
+            for(var n = 1; n <= m; n++) {
+                var sum = m*n;
+                var td = document.createElement('td');
+                td.innerHTML = n + '*' + m + '=' + sum;
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+    }
+</script>
+</body>
+</html>

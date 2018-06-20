@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task</title>
+</head>
+<body>
+<div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+<button id="fade-btn">淡出</button>
+
+<!--针对以上 HTML，分别使用 setTimeout 和 setInterval 实现以下功能：-->
+<!--点击按钮时，开始改变 fade-obj 的透明度，开始一个淡出（逐渐消失）动画，直到透明度为0-->
+<!--在动画过程中，按钮的状态变为不可点击-->
+<!--在动画结束后，按钮状态恢复，且文字变成“淡入”-->
+<!--在 按钮显示 淡入 的状态时，点击按钮，开始一个“淡入”（逐渐出现）的动画，和上面类似按钮不可点，直到透明度完全不透明-->
+<!--淡入动画结束后，按钮文字变为“淡出”-->
+<!--暂时不要使用 CSS animation （以后我们再学习）-->
+
+<script>
+
+    var fadeBtn = document.getElementById('fade-btn');
+    var fadeObj = document.getElementById('fade-obj');
+    var opacity = 0;
+
+    fadeBtn.onclick = function () {
+        if (this.innerHTML === '淡出'){
+            this.innerHTML = '淡入';
+            fadeOut();
+        } else {
+            this.innerHTML = '淡出';
+            fadeIn();
+        }
+    }
+
+    function fadeIn() {
+        opacity++;
+        fadeObj.style.opacity = opacity/100;
+        t1 = setTimeout(fadeIn,20)
+        if (opacity == 100){
+            clearTimeout(t1)
+        }
+    }
+    function fadeOut() {
+        var opacity = 100;
+        var t2 = setInterval(function () {
+            opacity--;
+            fadeObj.style.opacity = opacity/100;
+           if (opacity == 0){
+               clearInterval(t2)
+           }
+        },20)
+
+    }
+</script>
+</body>
+</html>

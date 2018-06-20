@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task5</title>
+
+    <style>
+        #demo {
+            width: 480px;
+            height: 480px;
+            overflow: hidden;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="demo">
+    <img style="position: relative;" src="demo.jpg" height="8160" width="480"/>
+</div>
+
+
+<script>
+    var oImg = document.querySelector('img');
+    var positionY = 0;
+    var t1 = setInterval(function () {
+        positionY += 480;
+        oImg.style.bottom = positionY + 'px';
+        console.log(positionY)
+        if (positionY == 7680){
+            clearInterval(t1);
+        }
+    },1000/17)
+</script>
+</body>
+</html>

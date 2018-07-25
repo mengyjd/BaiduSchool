@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <label>String A:
+        <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+    </label>
+    <textarea id="str-a"></textarea>
+    <label>String B:
+        <input id="radio-b" type="radio" name="str-obj" value="b">
+    </label>
+    <textarea id="str-b"></textarea>
+    <label>Num A：<input id="num-a" type="number" value="0"></label>
+    <label>Num B：<input id="num-b" type="number" value="1"></label>
+</div>
+<div>
+    <button id="b1">1获取当前选中输入的内容长度</button>
+    <button id="b2">2当前选中输入中的第3个字符</button>
+    <button id="b3">3把两个输入框的文字连接在一起输出（concat）</button>
+    <button id="b4">4输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+    <button id="b5">5输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+    <button id="b6">6使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+    <button id="b7">7当前选中输入框的行数</button>
+    <button id="b8">8使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+    <button id="b9">9把所选输入框中的内容全部转为大写</button>
+    <button id="b10">10把所选输入框中的内容全部转为小写</button>
+    <button id="b11">11把所选输入框中内容的半角空格全部去除</button>
+    <button id="b12">12把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+</div>
+<p id="result"></p>
+
+
+<script>
+    var oRadioA = document.querySelector('#radio-a')
+    var oRadioB = document.querySelector('#radio-b')
+    var oStrA = document.querySelector('#str-a')
+    var oStrB = document.querySelector('#str-b')
+    var oResult = document.querySelector('#result')
+    var oNumA = document.querySelector('#num-a');
+    var oNumB = document.querySelector('#num-b');
+
+
+    //将radio初始状态改为false
+    oRadioA.checked = false;
+    oRadioB.checked = false;
+
+    //改变radio状态
+    oRadioA.onclick = function(){
+      if (!oRadioA.checked) {
+          oRadioA.checked = true;
+      }else {
+          oRadioB.checked = false;
+      }
+    }
+    oRadioB.onclick = function(){
+        if (!oRadioB.checked) {
+            oRadioB.checked = true;
+        }else {
+            oRadioA.checked = false;
+        }
+    }
+
+    //添加监听事件
+    document.addEventListener('click',function (ev) {
+        var ev = ev || window.event;
+        var target = ev.target || ev.srcElement;
+        var strA = oStrA.value;//获取字符串A
+        var strB = oStrB.value;//获取字符串B
+        var numA = parseInt(oNumA.value)
+        var numB = parseInt(oNumB.value)
+
+        if (target.nodeName.toLowerCase() === 'button'){
+            switch (target.id){
+                case 'b1':
+                    oResult.innerHTML = (oRadioA.checked) ?
+                        '内容长度为:' + strA.length : '内容长度为:' + strB.length
+                    break
+                case 'b2':
+                    oResult.innerHTML = (oRadioA.checked) ? strA[2] : strB[2]
+                    break
+                case 'b3':
+                    oResult.innerHTML = strA+strB
+                    break
+                case 'b4':
+                    oResult.innerHTML = strA.indexOf(strB) + 1
+                    break
+                case 'b5':
+                    oResult.innerHTML = strB.lastIndexOf(strA) + 1
+                    break
+                case 'b6':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.slice(numA+1,numB);
+                    } else {
+                        oResult.innerHTML = strB.slice(numA+1,numB);
+                    }
+                    break
+                case 'b7':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = oStrA.rows;
+                    } else {
+                        oResult.innerHTML = oStrB.rows;
+                    }
+                    break
+                case 'b8':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.substr(numA+1,numB)
+                    } else {
+                        oResult.innerHTML = strB.substr(numA+1,numB)
+                    }
+                    break
+                case 'b9':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.toUpperCase();
+                    } else {
+                        oResult.innerHTML = strB.toUpperCase();
+                    }
+                    break
+                case 'b10':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.toLowerCase();
+                    } else {
+                        oResult.innerHTML = strB.toLowerCase();
+                    }
+                    break
+                case 'b11':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.replace(/ /g,'');
+                    } else {
+                        oResult.innerHTML = strB.replace(/ /g,'');
+                    }
+                    break
+                case 'b12':
+                    if (oRadioA.checked){
+                        oResult.innerHTML = strA.replace(/a/g,strB);
+                    } else {
+                        oResult.innerHTML = strB.replace(/a/g,strA);
+                    }
+                    break
+            }
+        } 
+    })
+</script>
+
+</body>
+</html>

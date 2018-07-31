@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task2</title>
+</head>
+<body>
+
+<select id="year-select"></select>
+年
+<select id="month-select"></select>
+月
+<select id="day-select"></select>
+日
+<select id="hour-select"></select>
+时
+<select id="minite-select"></select>
+分
+<select id="second-select"></select>
+秒
+<p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+
+<script>
+    var yearS = document.querySelector('#year-select');
+    var monthS = document.querySelector('#month-select');
+    var dayS = document.querySelector('#day-select');
+    var hourS = document.querySelector('#hour-select');
+    var miniteS = document.querySelector('#minite-select');
+    var secondS = document.querySelector('#second-select');
+    var aSelect = document.querySelectorAll('select');
+    var result = document.querySelector('#result-wrapper');
+
+    initSelect();
+
+    function initSelect(){
+        createOption(2010,2050,yearS);
+        createOption(1,12,monthS);
+        createOption(0,23,hourS);
+        createOption(0,59,miniteS);
+        createOption(0,59,secondS);
+        createDays(monthS.value);
+
+        lisentSelectsChanged(aSelect);
+        result.innerHTML = '现在距离 ' + getSelectTime() +  ' 还有 '
+            + compareDate(aSelect[0].value,aSelect[1].value,aSelect[2].value,
+            aSelect[3].value,aSelect[4].value,aSelect[5].value);
+        var t1 = setInterval(function () {
+            result.innerHTML = '现在距离 ' + getSelectTime() +  ' 还有 '
+                + compareDate(aSelect[0].value,aSelect[1].value,aSelect[2].value,
+                    aSelect[3].value,aSelect[4].value,aSelect[5].value);
+        },1000)
+    }
+
+    function getSelectTime() {
+        var selectTime = yearS.value + '年' + monthS.value + '月'
+            + dayS.value + '日' + getWeek()
+            + ' ' + formatNumber(hourS.value) + ':'
+            + formatNumber(miniteS.value) + ':' + formatNumber(secondS.value) + ' ';
+        return selectTime;
+    }
+
+    function lisentSelectsChanged(aSelect) {
+        for(var i = 0; i < aSelect.length; i++) {
+            aSelect[i].onchange = function () {
+                var surplus = compareDate(aSelect[0].value,aSelect[1].value,aSelect[2].value,
+                    aSelect[3].value,aSelect[4].value,aSelect[5].value);
+                result.innerHTML = '现在距离 ' + getSelectTime() +  ' 还有 ' + surplus;
+                t1 = null;
+                var t2 = setInterval(function () {
+                    result.innerHTML = '现在距离 ' + getSelectTime() +  ' 还有 '
+                        + compareDate(aSelect[0].value,aSelect[1].value,aSelect[2].value,
+                            aSelect[3].value,aSelect[4].value,aSelect[5].value);
+                },1000)
+            }
+        }
+    }
+
+    monthS.onchange = function () {
+        createDays(monthS.value);
+    };
+
+    function formatNumber(num) {
+        if (num < 10){
+            num = '0' + num;
+        }
+        return num;
+    }
+
+    function createOption(start, end,element) {
+        for(var i = start; i <= end; i++) {
+            var option = document.createElement('option');
+            var val = i;
+            if (val < 10){
+                val = '0' + val;
+            }
+            option.innerHTML = val;
+            option.value = i;
+            element.appendChild(option);
+        }
+    }
+    
+    function getWeek() {
+        var week = new Date().getDay();
+        var weeks = [];
+        weeks[0] = '星期天';
+        weeks[1] = '星期一';
+        weeks[2] = '星期二';
+        weeks[3] = '星期三';
+        weeks[4] = '星期四';
+        weeks[5] = '星期无';
+        weeks[6] = '星期六';
+        return weeks[week];
+    }
+
+    function compareDate(years,months,days,hours,minites,seconds) {
+        var myDate = new Date();
+        myDate.setFullYear(years,months-1,days);
+        myDate.setHours(hours,minites,seconds,0);
+        var nowDate = new Date();
+        var surplusSconend = (nowDate-myDate)/1000;
+        var day = Math.floor((surplusSconend)/86400);
+        var hour = Math.floor((surplusSconend%86400)/3600);
+        var minite = Math.floor(((surplusSconend%86400)%3600)/60);
+        var second = Math.floor(((surplusSconend%86400)%3600)%60);
+        var countTime = day + '天' + Math.abs(hour) + '小时' + Math.abs(minite) + '分' + Math.abs(second) + '秒';
+        return countTime;
+    }
+
+    function createDays(month) {
+        month = parseInt(month);
+        var childs = dayS.childNodes;
+        for(var i = childs.length-1; i >= 0 ; i--) {
+            dayS.removeChild(childs[i]);
+        }
+        if (month === 2){
+            createOption(1,28,dayS);
+        } else if (month === 4 || month === 6 || month === 9 || month === 11 ) {
+            createOption(1,30,dayS);
+        } else {
+            createOption(1,31,dayS);
+        }
+    }
+
+</script>
+</body>
+</html>

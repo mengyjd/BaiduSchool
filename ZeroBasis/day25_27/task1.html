@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task1</title>
+</head>
+<body>
+
+
+<script>
+    //-- 假设时间为2008年10月10日星期一的12点12分12秒，显示2008年10月10日星期一 12:12:12
+    //输出格式变为：2008-10-10 Monday 07:10:30 PM
+    getDate();
+
+    function getDate(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var week = date.getDay();
+        var day = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+
+        var week1 = formatWeekZh(week);
+        var week2 = formatWeekEnglish(week);
+        //当小于10 前导0
+        month = formatTime(month);
+        day = formatTime(day);
+        hours = formatTime(hours);
+        minutes = formatTime(minutes);
+        seconds = formatTime(seconds);
+        var time1 = formatTime24Hours();
+        var time2 = formatTime12Hours();
+
+        document.write(year + '年',month + '月',day + '日',week1 + ' ',time1 + '<br>');
+        document.write(year + '-',month + '-',day + ' ',week2 + ' ',time2);
+
+        function formatWeekZh(week) {
+            var weeks = [];
+            weeks[0] = '星期天';
+            weeks[1] = '星期一';
+            weeks[2] = '星期二';
+            weeks[3] = '星期三';
+            weeks[4] = '星期四';
+            weeks[5] = '星期无';
+            weeks[6] = '星期六';
+            return weeks[week];
+        }
+
+        function formatWeekEnglish(week) {
+            var weeks = [];
+            weeks[0] = 'Sunday';
+            weeks[1] = 'Monday';
+            weeks[2] = 'Tuesday';
+            weeks[3] = 'Wednesday';
+            weeks[4] = 'Thursday';
+            weeks[5] = 'Friday';
+            weeks[6] = 'Saturday';
+            return weeks[week];
+        }
+
+        function formatTime(time) {
+            if (time < 10){
+                return '0' + time;
+            } else {
+                return time;
+            }
+        }
+
+        function formatTime24Hours() {
+            return hours + ':' + minutes + ':' + seconds;
+        }
+
+        function formatTime12Hours() {
+            if (hours <= 12){
+                hours = formatTime(hours);
+                return hours + ':' + minutes + ':' + seconds + ' AM';
+            }else {
+                hours = hours - 12;
+                hours = formatTime(hours);
+                return hours + ':' + minutes + ':' + seconds + ' PM';
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

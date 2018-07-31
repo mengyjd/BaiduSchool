@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>task2</title>
+    <title>倒计时</title>
 </head>
 <body>
 
@@ -33,7 +33,7 @@
     initSelect();
 
     function initSelect(){
-        createOption(2010,2050,yearS);
+        createOption(1970,2150,yearS);
         createOption(1,12,monthS);
         createOption(0,23,hourS);
         createOption(0,59,miniteS);
@@ -77,6 +77,10 @@
 
     monthS.onchange = function () {
         createDays(monthS.value);
+    };
+
+    yearS.onchange = function () {
+        createDays(monthS.value)
     };
 
     function formatNumber(num) {
@@ -133,12 +137,34 @@
             dayS.removeChild(childs[i]);
         }
         if (month === 2){
-            createOption(1,28,dayS);
+            if(isLeap(yearS.value)){
+                createOption(1,29,dayS);
+            } else {
+                createOption(1,28,dayS);
+            }
+
         } else if (month === 4 || month === 6 || month === 9 || month === 11 ) {
             createOption(1,30,dayS);
         } else {
             createOption(1,31,dayS);
         }
+    }
+
+    function isLeap(year) {
+        year = parseInt(year);
+        //判断是否为整百年
+        if (year % 100 === 0) {
+            //判断是否为闰年
+            if (year % 400 !== 0) {
+                return false;
+            }
+        }
+        //判断是否为闰年
+        if (year % 4 !== 0){
+            return false;
+        }
+        //返回是闰年
+        return true;
     }
 
 </script>

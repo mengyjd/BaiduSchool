@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>task4</title>
 </head>
 <body>
 
@@ -63,11 +63,8 @@
         }
     }
 
-
     // findIdByName('Candy');
     // findNameById(2);
-    //getListWithDLR();
-    getListWithLRD();
     // 假设id和name均不会重复，根据输入name找到对应的id
     function findIdByName(name) {
         eachName(tree,name);
@@ -102,41 +99,56 @@
         eachId(tree,id)
     }
 
+
+    //getListWithDLR();
+        //getListWithLDR();
+    getListWithLRD();
     // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
     function getListWithDLR() {
-
-        eachDLR(tree);
-        function eachDLR(obj) {
-            console.log(obj.name);
-            for(var prop in obj){
-                if (typeof obj[prop] === 'object'){
-                    eachDLR(obj[prop])
-                }
+        function eachObj(obj) {
+            if (obj){
+                console.log(obj.name);
             }
-
+            if (obj.left){
+                eachObj(obj.left);
+            }
+            if (obj.right){
+                eachObj(obj.right)
+            }
         }
+        eachObj(tree);
     }
 
     // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
     function getListWithLDR() {
 
+        eachObj(tree);
+        function eachObj(obj) {
+            if (obj){
+                if (obj.left){
+                    eachObj(obj.left);
+                }
+                console.log(obj.name);
+                if (obj.right){
+                    eachObj(obj.right);
+                }
+            } 
+        }
     }
 
     // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
     function getListWithLRD() {
-        var name = [];
-        eachLRD(tree);
-        for(var i = 0; i < name.length; i++) {
-            console.log(name[i]);
-        }
-        function eachLRD(obj) {
-            name.unshift(obj.name);
-            for(var prop in obj){
-                if (typeof obj[prop] === 'object'){
-                    eachLRD(obj[prop])
+        eachObj(tree);
+        function eachObj(obj) {
+            if (obj) {
+                if (obj.left){
+                    eachObj(obj.left);
                 }
+                if (obj.right){
+                    eachObj(obj.right);
+                }
+                console.log(obj.name);
             }
-
         }
     }
 </script>

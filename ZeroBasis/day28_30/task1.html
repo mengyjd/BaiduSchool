@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输入提示</title>
+
+    <style>
+        input {
+            outline: none;
+            display: block;
+            width: 300px;
+            height: 30px;
+            border: 1px solid #dbdcdc;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .email-sug li {
+            height: 30px;
+        }
+
+        .email-sug {
+            list-style-type: none;
+            width: 300px;
+            padding: 0;
+            margin: 0;
+            display: none;
+            border: 1px solid #dbdcdc;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .email-sug li:nth-of-type(1) {
+            background-color: #ffc4ce;
+        }
+
+        .email-sug li:hover {
+            background-color: #bcdfe6;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+    <ul class="test"></ul>
+
+</div>
+
+<script>
+    // 邮箱后缀List参考
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+    var input = document.querySelector('#email-input');
+    var ul = document.querySelector('#email-sug-wrapper');
+    var sugList = [];
+
+
+    createSupList();
+
+    //创建提示信息的li
+    function createSupList() {
+        for (var i = 0; i < postfixList.length; i++) {
+            var sug = document.createElement('li');
+            clickSug(sug);
+            sugList.push(sug);
+            ul.appendChild(sug);
+        }
+    }
+
+    input.oninput = function () {
+        for (var i = 0; i < sugList.length; i++) {
+            sugList[i].innerHTML = input.value + '@' + postfixList[i];
+            ul.style.display = 'block';
+        }
+    };
+
+    function clickSug(sug) {
+        sug.onclick = function () {
+            input.value = sug.innerHTML;
+            ul.style.display = 'none';
+        }
+    }
+
+    input.onblur = function () {
+        setTimeout(function () {
+            ul.style.display = 'none';
+        },300)
+    };
+
+</script>
+</body>
+</html>

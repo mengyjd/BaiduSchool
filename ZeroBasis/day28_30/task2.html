@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输入提示2</title>
+
+    <style>
+        input {
+            outline: none;
+            display: block;
+            width: 300px;
+            height: 30px;
+            border: 1px solid #dbdcdc;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .email-sug li {
+            height: 30px;
+        }
+
+        .email-sug {
+            list-style-type: none;
+            width: 300px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #dbdcdc;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .email-sug li.select {
+            background-color: #ffc4ce;
+        }
+
+        .email-sug li:hover {
+            background-color: #bcdfe6;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+
+</div>
+
+<script>
+    // 邮箱后缀List参考
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+    var input = document.querySelector('#email-input');
+    var ul = document.querySelector('#email-sug-wrapper');
+    var nowSelectTipIndex = 0;
+
+
+    input.focus();
+    input.onkeydown = function (e) {
+            addSugToList();
+        controlSug();
+        listenerKeyborad(e.keyCode);
+    };
+
+    //获取用户输入
+    function getUserInput() {
+        return htmlDecode(input.value);
+    }
+
+    //创建输入提示
+    function createSug() {
+        var aSug = [];
+        var userInput = getUserInput();
+        var inputFirst;
+        var inputLast;
+        //判断用户是否输入@符号
+        if (userInput.match('@')) {
+            //获取@符号前面的字符串
+            inputFirst = userInput.match(/[1-9]*[A-z]*@/).toString();
+            //获取@符号后面的字符串
+            inputLast = userInput.match(/@[1-9]*[A-z]*/).toString().replace('@', '');
+        } else {
+            userInput = userInput + '@';
+            inputFirst = userInput;
+        }
+        //遍历邮箱后缀
+        for (var i = 0; i < postfixList.length; i++) {
+            var patt = new RegExp(inputLast);
+            //判断@符号后面的字符是否和邮箱后缀相同
+            if (patt.exec(postfixList[i])) {
+                userInput = inputFirst + postfixList[i];
+                var sug = document.createElement('li');
+                sug.innerHTML = userInput;
+                aSug.push(sug);
+            }
+        }
+        aSug[nowSelectTipIndex].className = 'select';
+        return aSug;
+    }
+
+    //将输入提示(li)添加到ul
+    function addSugToList() {
+        var aSug = createSug();
+        //清除已存在的li
+        ul.innerHTML = '';
+        for (var item of aSug) {
+            ul.appendChild(item)
+        }
+    }
+
+    //控制提示框的显示和隐藏
+    function controlSug() {
+        if (input.value === '') {
+            hideSug();
+        } else {
+            showSug();
+        }
+    }
+
+    function hideSug() {
+        ul.style.display = 'none';
+    }
+
+    function showSug() {
+        ul.style.display = 'block';
+    }
+
+    /*
+    点击li时将提示添加到input中隐藏ul
+ */
+    ul.onclick = function (ev) {
+        var e = ev || window.event;
+        var target = e.target || e.srcElement;
+        var userInput;
+        if (target.nodeName.toLowerCase() === 'li') {
+            userInput = target.innerHTML;
+            input.value = userInput;
+            hideSug();
+        }
+        input.focus();
+    };
+    addEventListener('click', function (ev) {
+        var e = ev || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName.toLowerCase() !== 'li') {
+            hideSug();
+        }
+    });
+
+    //用浏览器内部转换器实现html特殊数字符的转码
+    function htmlDecode(text) {
+        //首先动态创建一个元素容器标签(如div)
+        var temp = document.createElement("div");
+        //然后将要转换的字符设置成这个元素的innerHtml(ie，火狐，google都支持)
+        temp.innerHTML = text;
+        //最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+        var outPut = temp.innerText || temp.textContent;
+        temp = null;//将temp释放
+        return outPut;
+    }
+
+    function listenerKeyborad(key) {
+        key = parseInt(key);
+        var DOWN = 40,
+            TOP = 38,
+            ENTER = 13,
+            ESC = 27;
+        switch (key) {
+            case DOWN:
+                if (nowSelectTipIndex < ul.childNodes.length-1){
+                    nowSelectTipIndex += 1;
+                } else {
+                    nowSelectTipIndex = 0;
+                }
+                break;
+            case TOP:
+                if (nowSelectTipIndex > 0){
+                    nowSelectTipIndex -= 1;
+                } else {
+                    nowSelectTipIndex = ul.childNodes.length-1;
+                }
+                break;
+            case ENTER:
+                input.value = ul.childNodes[nowSelectTipIndex].innerHTML;
+                hideSug();
+                break;
+            case ESC:
+                input.select();
+                break;
+            default:
+                resetSelect();
+                break
+        }
+    }
+
+    function resetSelect() {
+        nowSelectTipIndex = 0;
+    }
+</script>
+</body>
+</html>

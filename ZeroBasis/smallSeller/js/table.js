@@ -1,3 +1,4 @@
+var tableWrapper = document.querySelector('#table-wrapper');
 /**
  * 获取选中的checkbox
  * @param {object} wrapper checkbox容器
@@ -18,7 +19,7 @@ function getCheckItems(wrapper) {
  * 通过选中的checkbox获取数据data
  * @returns {Array} data 返回符合条件的数据
  */
-function getData(){
+function getCheckedData(){
     var checkRegions = getCheckItems(regionWrapper);
     var checkProducts = getCheckItems(productWrapper);
     var data = [];
@@ -42,8 +43,7 @@ function getData(){
 
 //绘制表格
 function drawTable() {
-    var data = getData();
-    var tableWrapper = document.querySelector('#table-wrapper');
+    var data = getCheckedData();
     tableWrapper.innerHTML = '';//清除上次绘制的表格
     var table = document.createElement('table');
     var tbody = document.createElement('tbody');

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<button id="a">A</button>
+<button id="b">B</button>
+<button id="c">C</button>
+<br>
+<button id="d">D</button>
+<button id="e">E</button>
+<button id="f">F</button>
+
+<div id="contABC"></div>
+<div id="contDEF"></div>
+
+<script>
+    var contABC = document.querySelector('#contABC');
+    var contDEF = document.querySelector('#contDEF');
+
+    var content = {};
+
+    document.addEventListener('click', function (e) {
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+        switch (target.id) {
+            case 'a':
+            case 'b':
+            case 'c':
+                content.first = target.innerHTML;
+                break;
+            case 'd':
+            case 'e':
+            case 'f':
+                content.second = target.innerHTML;
+                break;
+        }
+        location.hash = JSON.stringify(content);
+    });
+
+    function analysisHash() {
+        var parameter = location.hash.replace('#', '');
+        parameter = parameter.replace(/%22/g, '\"');
+        return JSON.parse(parameter);
+    }
+
+    function drawContent() {
+        if (!location.hash) return ;
+        var divContent = analysisHash();
+        if (divContent.first)
+            contABC.innerHTML = divContent.first;
+        if (divContent.second)
+            contDEF.innerHTML = divContent.second;
+    }
+
+
+    window.onhashchange = function () {
+        drawContent();
+    };
+    drawContent();
+
+</script>
+</body>
+</html>

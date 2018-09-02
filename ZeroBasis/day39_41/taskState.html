@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pushState</title>
+</head>
+<body>
+
+<button id="a">A</button>
+<button id="b">B</button>
+<button id="c">C</button>
+<br>
+<button id="d">D</button>
+<button id="e">E</button>
+<button id="f">F</button>
+
+
+<div id="contABC"></div>
+<div id="contDEF"></div>
+
+<script>
+    var contABC = document.querySelector('#contABC');
+    var contDEF = document.querySelector('#contDEF');
+    var divContent = {};
+    addEventListener('click', function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        switch (target.id) {
+            case 'a':
+            case 'b':
+            case 'c':
+                divContent.first = target.id;
+                break;
+            case 'd':
+            case 'e':
+            case 'f':
+                divContent.second = target.id;
+                break;
+        }
+        var link = location.href.split('?')[0] + '?' + JSON.stringify(divContent);
+        history.pushState({},null,link);
+        drawContent();
+    });
+
+    function drawContent() {
+        var content = location.href.split('?')[1];
+        content = content.replace(/%22/g,'\"');
+        content = JSON.parse(content);
+        if (content.first){
+            contABC.innerHTML = content.first;
+        }
+        if (content.second) {
+            contDEF.innerHTML = content.second;
+        }
+    }
+
+    window.addEventListener('popstate', function () {
+        drawContent();
+    })
+</script>
+</body>
+</html>

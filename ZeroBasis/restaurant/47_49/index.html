@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .abs {
+            position: absolute;
+        }
+        #waiter {
+            top: 300px;
+            left: 1000px;
+        }
+        #cook {
+            top: 50px;
+        }
+        #customer {
+            top: 300px;
+            left: 1200px;
+        }
+        #restaurantStatus {
+            right: 200px;
+            top: 50px;
+            width: 250px;
+        }
+        #customerStatus {
+            top: 250px;
+            left: 1300px;
+        }
+        #waiterStatus {
+            width: 140px;
+            top: 250px;
+            left: 1000px;
+        }
+        #cookStatus {
+            left: 50px;
+            top: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="abs" id="restaurantStatus">
+    <p>餐厅状态:</p>
+    <p>资金: <span id="restaurantCash">10000</span></p>
+    <p>员工: <span>2</span></p>
+</div>
+<p class="abs" id="customerStatus">customerStatus</p>
+<p class="abs" id="waiterStatus">waiterStatus</p>
+<p class="abs" id="cookStatus">cookStatus</p>
+<img class="abs" id="waiter" src="images/waiter.png" alt="">
+<img class="abs" id="cook" src="images/cook.png" alt="">
+<img class="abs" id="customer" src="images/customer.png" alt="">
+
+<script src="tools.js"></script>
+<script src="foods.js"></script>
+<script src="restaurant.js"></script>
+<script src="customer.js"></script>
+<script src="staff.js"></script>
+<script src="app.js"></script>
+</body>
+
+
+</html>
